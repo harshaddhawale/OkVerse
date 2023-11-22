@@ -46,6 +46,7 @@ hr {
   <table border="1">
     <thead>
       <tr>
+        <th>Date</th>
         <th>Session Total</th>
       </tr>
     </thead>
@@ -65,6 +66,7 @@ hr {
 
   const clickCountDisplay = document.getElementById('clickCount');
   const clickTableBody = document.getElementById('clickTableBody');
+  let lastDate = sessionStorage.getItem('lastDate');
 
   document.getElementById('clickButton').addEventListener('click', function() {
     sessionClicks++;
@@ -72,16 +74,33 @@ hr {
 
     clickCountDisplay.textContent = sessionClicks;
 
-    const newRow = document.createElement('tr');
-    const newCell = document.createElement('td');
-    newCell.textContent = sessionClicks;
-    newRow.appendChild(newCell);
-    clickTableBody.innerHTML = ''; // Clear previous content
-    clickTableBody.appendChild(newRow);
+    const currentDate = new Date().toLocaleDateString();
+
+    if (currentDate === lastDate) {
+      const rows = clickTableBody.querySelectorAll('tr');
+      const lastRow = rows[rows.length - 1];
+      const countCell = lastRow.querySelector('td:nth-child(2)');
+      countCell.textContent = sessionClicks;
+    } else {
+      lastDate = currentDate;
+      sessionStorage.setItem('lastDate', lastDate);
+
+      const newRow = document.createElement('tr');
+      const dateCell = document.createElement('td');
+      const countCell = document.createElement('td');
+
+      dateCell.textContent = currentDate;
+      countCell.textContent = sessionClicks;
+
+      newRow.appendChild(dateCell);
+      newRow.appendChild(countCell);
+      clickTableBody.appendChild(newRow);
+    }
   });
 
   clickCountDisplay.textContent = sessionClicks;
 });
+
 
 </script>
 
