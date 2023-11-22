@@ -58,21 +58,16 @@ th, td {
     </table>
 
 <script>
-   document.addEventListener('DOMContentLoaded', function() {
-  let sessionClicks = sessionStorage.getItem('sessionClicks');
-  if (!sessionClicks) {
-    sessionClicks = 0;
-  } else {
-    sessionClicks = parseInt(sessionClicks);
-  }
+  document.addEventListener('DOMContentLoaded', function() {
+  let sessionClicks = parseInt(localStorage.getItem('sessionClicks')) || 0;
+  const lastDate = localStorage.getItem('lastDate');
 
   const clickCountDisplay = document.getElementById('clickCount');
   const clickTableBody = document.getElementById('clickTableBody');
-  let lastDate = sessionStorage.getItem('lastDate');
 
   document.getElementById('clickButton').addEventListener('click', function() {
     sessionClicks++;
-    sessionStorage.setItem('sessionClicks', sessionClicks);
+    localStorage.setItem('sessionClicks', sessionClicks);
 
     clickCountDisplay.textContent = sessionClicks;
 
@@ -84,8 +79,7 @@ th, td {
       const countCell = lastRow.querySelector('td:nth-child(2)');
       countCell.textContent = sessionClicks;
     } else {
-      lastDate = currentDate;
-      sessionStorage.setItem('lastDate', lastDate);
+      localStorage.setItem('lastDate', currentDate);
 
       const newRow = document.createElement('tr');
       const dateCell = document.createElement('td');
@@ -102,6 +96,7 @@ th, td {
 
   clickCountDisplay.textContent = sessionClicks;
 });
+
 
 
 </script>
