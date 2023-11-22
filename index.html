@@ -36,13 +36,7 @@ hr {
 </style>
 <body>
 
-  <div class="topleft">
-  </div>
-  <div class="middle">
-    <h1>OK Verse CountDown</h1>
-
-      
-<h1>Click Counter</h1>
+ <h1>Click Counter</h1>
   
   <button id="clickButton">Click Me!</button>
   
@@ -52,42 +46,43 @@ hr {
   <table border="1">
     <thead>
       <tr>
-        <th>Session Clicks</th>
+        <th>Session Total</th>
       </tr>
     </thead>
     <tbody id="clickTableBody">
       <!-- Table body will be populated with JavaScript -->
     </tbody>
   </table>
-      
-  </div>
-  <div class="bottomleft">
-    <p></p>
-  </div>
+
 <script>
-    let clickCount = 0;
-const clickButton = document.getElementById('clickButton');
-const clickCountDisplay = document.getElementById('clickCount');
-const clickTableBody = document.getElementById('clickTableBody');
+   document.addEventListener('DOMContentLoaded', function() {
+  let sessionClicks = sessionStorage.getItem('sessionClicks');
+  if (!sessionClicks) {
+    sessionClicks = 0;
+  } else {
+    sessionClicks = parseInt(sessionClicks);
+  }
 
-clickButton.addEventListener('click', function() {
-  clickCount++;
-  clickCountDisplay.textContent = clickCount;
+  const clickCountDisplay = document.getElementById('clickCount');
+  const clickTableBody = document.getElementById('clickTableBody');
 
-  // Add click count to table on each click
-  const newRow = document.createElement('tr');
-  const newCell = document.createElement('td');
-  newCell.textContent = clickCount;
-  newRow.appendChild(newCell);
-  clickTableBody.appendChild(newRow);
+  document.getElementById('clickButton').addEventListener('click', function() {
+    sessionClicks++;
+    sessionStorage.setItem('sessionClicks', sessionClicks);
+
+    clickCountDisplay.textContent = sessionClicks;
+
+    const newRow = document.createElement('tr');
+    const newCell = document.createElement('td');
+    newCell.textContent = sessionClicks;
+    newRow.appendChild(newCell);
+    clickTableBody.innerHTML = ''; // Clear previous content
+    clickTableBody.appendChild(newRow);
+  });
+
+  clickCountDisplay.textContent = sessionClicks;
 });
 
-// Reset click count and table on page reload/refresh
-window.addEventListener('beforeunload', function() {
-  clickCount = 0;
-  clickCountDisplay.textContent = clickCount;
-  clickTableBody.innerHTML = '';
-});
 </script>
 
 </body>
