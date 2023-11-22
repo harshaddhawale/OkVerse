@@ -1,23 +1,12 @@
 
 <!DOCTYPE html><html><head>  <meta charset="utf-8"> <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta charset="utf-8">
-<title>Ananta Geo</title>
+<title>OkVerse</title>
 </head>
 <style>
 body, html {
     height: 100%;
     margin: 0;
-}
-
-.bgimg {
-    background-image: url('https://www.pirateshipvallarta.com/blog/wp-content/uploads/2016/12/captain-sparrows-black-pearl-pirate-ship-1050x656.jpg');
-    height: 100%;
-    background-position: center;
-    background-size: cover;
-    position: relative;
-    color: white;
-    font-family: "Courier New", Courier, monospace;
-    font-size: 25px;
 }
 
 .topleft {
@@ -47,22 +36,59 @@ hr {
 </style>
 <body>
 
-<div class="bgimg">
   <div class="topleft">
-
   </div>
   <div class="middle">
-    <h1>COMING SOON</h1>
-    <hr>
-    
+    <h1>OK Verse CountDown</h1>
+
+      
+<h1>Click Counter</h1>
+  
+  <button id="clickButton">Click Me!</button>
+  
+  <h2>Click Count:</h2>
+  <p id="clickCount">0</p>
+
+  <table border="1">
+    <thead>
+      <tr>
+        <th>Session Clicks</th>
+      </tr>
+    </thead>
+    <tbody id="clickTableBody">
+      <!-- Table body will be populated with JavaScript -->
+    </tbody>
+  </table>
+      
   </div>
   <div class="bottomleft">
     <p></p>
   </div>
-</div>
+<script>
+    let clickCount = 0;
+const clickButton = document.getElementById('clickButton');
+const clickCountDisplay = document.getElementById('clickCount');
+const clickTableBody = document.getElementById('clickTableBody');
 
+clickButton.addEventListener('click', function() {
+  clickCount++;
+  clickCountDisplay.textContent = clickCount;
 
+  // Add click count to table on each click
+  const newRow = document.createElement('tr');
+  const newCell = document.createElement('td');
+  newCell.textContent = clickCount;
+  newRow.appendChild(newCell);
+  clickTableBody.appendChild(newRow);
+});
 
+// Reset click count and table on page reload/refresh
+window.addEventListener('beforeunload', function() {
+  clickCount = 0;
+  clickCountDisplay.textContent = clickCount;
+  clickTableBody.innerHTML = '';
+});
+</script>
 
 </body>
 </html>
