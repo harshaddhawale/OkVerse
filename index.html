@@ -4,56 +4,58 @@
 <title>OkVerse</title>
 </head>
 <style>
-body, html {
-    height: 100%;
-    margin: 0;
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
 }
 
-.topleft {
-    position: absolute;
-    top: 0;
-    left: 16px;
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
+  padding-top: 50px; /* To add space from top */
 }
 
-.bottomleft {
-    position: absolute;
-    bottom: 0;
-    left: 16px;
+table {
+  margin-top: 20px;
+  width: 100%;
 }
 
-.middle {
-    position: absolute;
-    top: 50%;
-    left: 70%;
-    transform: translate(-50%, -50%);
-    text-align: center;
+th, td {
+  padding: 8px;
 }
 
-hr {
-    margin: auto;
-    width: 40%;
+.floatingButton {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 999;
+  padding: 10px 20px;
+  font-size: 16px;
 }
+
 </style>
 <body>
 
- <h1>Click Counter</h1>
-  
-  <button id="clickButton">Click Me!</button>
-  
-  <h2>Click Count:</h2>
-  <p id="clickCount">0</p>
+ <div class="container">
+    <h1>OKVerse Counter</h1>
+    
+    <button id="clickButton" class="floatingButton">Count Ok!</button>
+    
+    <h2>Today's OK Count:</h2>
+    <p id="clickCount">0</p>
 
-  <table border="1">
-    <thead>
-      <tr>
-        <th>Date</th>
-        <th>Session Total</th>
-      </tr>
-    </thead>
-    <tbody id="clickTableBody">
-      <!-- Table body will be populated with JavaScript -->
-    </tbody>
-  </table>
+    <table border="1">
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Total Score</th>
+        </tr>
+      </thead>
+      <tbody id="clickTableBody">
+        <!-- Table body will be populated with JavaScript -->
+      </tbody>
+    </table>
 
 <script>
    document.addEventListener('DOMContentLoaded', function() {
